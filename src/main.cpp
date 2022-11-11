@@ -55,7 +55,7 @@ void fullScreenBackground(){
     }
 }
 
-void screenSetup(void *pvParameters){
+void screenSetup(){
     tft.init();
     tft.setRotation(3);
     tft.setColorDepth(16);
@@ -137,11 +137,11 @@ void checkButtonPress(){
 
 void mainLoop(void *pvParameters);
 
+void loop(){};
+
 void setup(){
     try{
-        xTaskCreatePinnedToCore(screenSetup, "screenSetup", 1024, NULL, 2, NULL, ARDUINO_RUNNING_CORE);
-
-//        screenSetup();
+        screenSetup();
 
         tft.fillScreen(ZX_BLUE0);
         tft.setTextFont(font);
@@ -154,7 +154,7 @@ void setup(){
 
         createParrotSprite();
 
-//        xTaskCreatePinnedToCore(mainLoop, "mainLoop", 4096, NULL, 2, NULL, ARDUINO_RUNNING_CORE);
+        xTaskCreatePinnedToCore(mainLoop, "mainLoop", 3 * 1024, NULL, 2, NULL, ARDUINO_RUNNING_CORE);
 
     }
     catch (std::exception const &e){
@@ -162,26 +162,26 @@ void setup(){
     }
 }
 
-void loop(){
-//    while(1) {
-//        try {
-//            // Draw background
-////        mainScene.pushImage(0, 0, mainWidth, mainHeight, wallpaper);
-//            mainScene.clear();
-//
-//            // Update coords
-//            move();
-//
-//            if (++count == 10) count = 0;
-//            if (++rotate == 360) rotate = 0;
-//            sprite[count].pushRotateZoom(&mainScene, x, y, rotate, 1, 1);
-//
-//            // Draw in middle of screen and show FPS
-//            mainScene.pushSprite(&tft, widthMiddle - (mainWidth >> 1), heightMiddle - (mainHeight >> 1));
-//            frameCount();
-//        }
-//        catch (std::exception const &e) {
-//            tft.print(e.what());
-//        }
-//    }
+void mainLoop(void *pvParameters){
+    while(1) {
+        try {
+            // Draw background
+//        mainScene.pushImage(0, 0, mainWidth, mainHeight, wallpaper);
+            mainScene.clear();
+
+            // Update coords
+            move();
+
+            if (++count == 10) count = 0;
+            if (++rotate == 360) rotate = 0;
+            sprite[count].pushRotateZoom(&mainScene, x, y, rotate, 1, 1);
+
+            // Draw in middle of screen and show FPS
+            mainScene.pushSprite(&tft, widthMiddle - (mainWidth >> 1), heightMiddle - (mainHeight >> 1));
+            frameCount();
+        }
+        catch (std::exception const &e) {
+            tft.print(e.what());
+        }
+    }
 }
