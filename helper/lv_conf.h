@@ -51,7 +51,7 @@
 /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
 #define LV_MEM_SIZE (48U * 1024U)          /*[bytes]*/
 
-/*Set an address for the memory pool instead of allocating it as a normal array. Can be in helper SRAM too.*/
+/*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
 #define LV_MEM_ADR 0     /*0: unused*/
 /*Instead of an address give a memory allocator that will be called to get a memory pool for LVGL. E.g. my_malloc*/
 #if LV_MEM_ADR == 0
@@ -268,14 +268,14 @@
  *-----------*/
 
 /*1: Show CPU usage and FPS count*/
-#define LV_USE_PERF_MONITOR 1
+#define LV_USE_PERF_MONITOR 0
 #if LV_USE_PERF_MONITOR
 #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 #endif
 
 /*1: Show the used memory and the memory fragmentation
  * Requires LV_MEM_CUSTOM = 0*/
-#define LV_USE_MEM_MONITOR 1
+#define LV_USE_MEM_MONITOR 0
 #if LV_USE_MEM_MONITOR
 #define LV_USE_MEM_MONITOR_POS LV_ALIGN_BOTTOM_LEFT
 #endif

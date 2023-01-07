@@ -18,10 +18,10 @@ class LGFX : public lgfx::LGFX_Device
     static constexpr int I2C_PIN_SCL = 39;
     static constexpr int I2C_PIN_INT = 40;
 
-    lgfx::Bus_Parallel16 _bus_instance;
-    lgfx::Panel_ILI9488 _panel_instance;
-    lgfx::Light_PWM     _light_instance;
-    lgfx::ITouch*  _touch_instance_ptr = nullptr;
+    lgfx::Bus_Parallel16    _bus_instance;
+    lgfx::Panel_ILI9488     _panel_instance;
+    lgfx::Light_PWM         _light_instance;
+    lgfx::ITouch*           _touch_instance_ptr = nullptr;
 
     /// Detects and configures the touch panel during initialization;
     bool init_impl(bool use_reset, bool use_clear) override
